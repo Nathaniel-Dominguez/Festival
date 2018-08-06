@@ -1,24 +1,34 @@
 {
 	// These create boot and loading states to load all the game assets before it starts.
 	// All this content will be read from a JSON file where we define the state assets, groups and prefabs.
+
 	"assets": {
+
 		"button_image": {"type": "image", "source": "assets/images/button.png"},
 		"sand_tile_image": {"type": "image", "source": "assets/images/sand_tile.png"},
 		"dancer_spritesheet": {"type": "spritesheet", "source": "assets/images/characters/dancer_f.png", "frame_width": 24, "frame_height": 32},
 		"queen_spritesheet": {"type": "spritesheet", "source": "assets/images/characters/queen_f.png", "frame_width": 24, "frame_height": 32},
 		"placeholder_enemy_spritesheet": {"type": "spritesheet", "source": "assets/images/enemies/placerholder.png", "frame_width": 128, "frame_height": 128}
+
 	},
+
 	// Okay so the codealong is having me define these for a later time I think, I'll comeback and comment this when I know what it's used for.
 	// Phaser Documentation definition of groups; A group is a container for display objects such as Sprites and Images.
+
 	"groups": [
 		"background",
 		"player_units",
 		"enemy_units",
 		"hud"
+
 	],
+
 	// Still unsure where I call these later. Looks like it's calling the sand sprite.
 	// Reading more documentation I've discovered that the prefabs directory is for your game objects, while states is for your game states
+	// Okay so I'm declaring my hud and background prefabs to use later when generating the game.
+
 	"prefabs": {
+
 		"background": {
 			"type": "background",
 			"position": {"x": 0, "y": 0},
@@ -29,5 +39,93 @@
 				"height": 320
 			}
 		},
+		
+		"enemy_rectangle": {
+			"type": "rectangle",
+			"position": {"x": 0, "y": 200},
+			"properties": {
+				"texture": "rectangle_image",
+				"group": "hud",
+				"scale": {"x": 0.3, "y": 1}
+			}
+		},
+
+		"action_rectangle": {
+			"type": "rectangle",
+			"position": {"x": 96, "y": 200},
+			"properties": {
+				"texture": "rectangle_image",
+				"group": "hud",
+				"scale": {"x": 0.3, "y": 1}
+			}
+		},
+
+		"player_rectangle": {
+			"type": "rectangle",
+			"position": {"x": 192, "y": 200},
+			"properties": {
+				"texture": "rectangle_image",
+				"group": "hud",
+				"scale": {"x": 0.4, "y": 1}
+			}
+		},
+
+		"dancer": {
+			"type": "player_unit",
+			"position": {"x": 250, "y": 70},
+			"properties": {
+				"texture": "dancer_spritesheet",
+				"group": "player_units",
+				"frame": 10,
+				"stats": {
+					"attack": 15,
+					"defense": 5,
+					"health": 100
+				}
+			}
+		},
+
+		"queen": {
+			"type": "player_unit",
+			"position": {"x": 250, "y": 150},
+			"properties": {
+				"texture": "queen_spritesheet",
+				"group": "player_units",
+				"frame": 10,
+				"stats": {
+					"attack": 20,
+					"defense": 2,
+					"health": 100
+				}
+			}
+		},
+
+		"placeholder1": {
+			"type": "enemy_unit",
+			"position": {"x": 100, "y": 90},
+			"properties": {
+				"texture": "placeholder_enemy_spritesheet",
+				"group": "enemy_units",
+				"stats": {
+					"attack": 10,
+					"defense": 1,
+					"health": 30
+				}
+			}
+		},
+
+		"placeholder2": {
+			"type": "enemy_unit",
+			"position": {"x": 100, "y": 170},
+			"properties": {
+				"texture": "placeholder_enemy_spritesheet",
+				"group": "enemy_units",
+				"stats": {
+					"attack": 10,
+					"defense": 1,
+					"health": 30
+				}
+			}
+		}
 	}
 }
