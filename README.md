@@ -1,2 +1,2 @@
 # Festival
-Festival themed platform game
+Festival themed turn based rpg - think like mother or earthbound 
