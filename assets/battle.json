@@ -1,0 +1,8 @@
+{
+	// loading images from sprite sheets
+	"assets": {
+		"button_image": {"type": "image", "source": "assets/images/button.png"},
+		"sand_tile_image": {"type": "image", "source": "assets/images/sand_tile.png"},
+		"female_fighter_spritesheet": {"type": "spritesheet", "source": "assets/images/characters/fighter_f.png"}
+	}
+}
