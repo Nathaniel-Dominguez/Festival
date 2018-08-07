@@ -13,7 +13,7 @@ var RPG = RPG || {};
 
 RPG.BattleState = function () {
 	"use strict";
-	Phaser.State.call (this);
+	Phaser.State.call(this);
 
 	this.prefab_classes = {
 		"background": RPG.TilePrefab.prototype.constructor,
@@ -25,7 +25,7 @@ RPG.BattleState = function () {
 	this.TEXT_STYLE = {font: "14px Arial", fill: "#FFFFFF"};
 };
 
-RPG.BattleState.prototype = Object.create (Phaser.State.prototype);
+RPG.BattleState.prototype = Object.create(Phaser.State.prototype);
 RPG.BattleState.prototype.constructor = RPG.BattleState;
 
 RPG.BattleState.prototype.init = function (level_data) {
@@ -43,14 +43,14 @@ RPG.BattleState.prototype.create = function () {
 
 	// Create groups
 	this.groups = {};
-	this.level_data.groups.forEach (function (group_name) {
+	this.level_data.groups.forEach(function (group_name) {
 		this.groups[group_name] = this.game.add.group();
 	}, this);
 
 	// Create prefabs
 	this.prefabs = {};
 	for (prefab_name in this.level_data.prefabs) {
-		if (this.level_data.prefabs.hasOwnProperty (prefab_name)) {
+		if (this.level_data.prefabs.hasOwnProperty(prefab_name)) {
 
 			// Create prefab
 			this.create_prefab (prefab_name, this.level_data.prefabs[prefab_name]);
@@ -64,9 +64,7 @@ RPG.BattleState.prototype.create_prefab = function (prefab_name, prefab_data) {
 
 	// create object according to its type
 	if (this.prefab_classes.hasOwnProperty(prefab_data.type)) {
-		prefab = new 
-		this.prefab_classes[prefab_data.type] 
-		(this, prefab_name, prefab_data.position, prefab_data.properties);
+		prefab = new this.prefab_classes[prefab_data.type](this, prefab_name, prefab_data.position, prefab_data.properties);
 	}
 };
 

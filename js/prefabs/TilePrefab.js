@@ -4,7 +4,7 @@ var RPG = RPG || {};
 
 RPG.TilePrefab = function (game_state, name, position, properties) {
 	"use strict";
-	Phaser.TileSprite.call(this, game_state.game, position.x, position.y, properties.width, properties.texture);
+	Phaser.TileSprite.call(this, game_state.game, position.x, position.y, properties.width, properties.height, properties.texture);
 
 	this.game_state = game_state;
 
