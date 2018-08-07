@@ -1,7 +1,7 @@
 {
   "name": "festival",
   "version": "1.0.0",
-  "description": "Festival themed platform game",
+  "description": "Festival themed top down RPG",
   "main": "index.js",
   "scripts": {
     "start": "browser-sync start --server . --files ."

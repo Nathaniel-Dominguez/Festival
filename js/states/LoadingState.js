@@ -25,6 +25,7 @@ RPG.LoadingState.prototype.preload = function () {
 	"use strict";
 	var assets, asset_loader, asset_key, asset;
 	assets = this.level_data.assets;
+	// Loads assets according to asset key
 	for (asset_key in assets) {
 		if (assets.hasOwnProperty(asset_key)) {
 			asset = assets[asset_key];

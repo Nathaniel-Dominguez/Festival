@@ -4,7 +4,7 @@
 
 	"assets": {
 
-		"button_image": {"type": "image", "source": "assets/images/button.png"},
+		"rectangle_image": {"type": "image", "source": "assets/images/rectangle.png"},
 		"sand_tile_image": {"type": "image", "source": "assets/images/sand_tile.png"},
 		"dancer_spritesheet": {"type": "spritesheet", "source": "assets/images/characters/dancer_f.png", "frame_width": 24, "frame_height": 32},
 		"queen_spritesheet": {"type": "spritesheet", "source": "assets/images/characters/queen_f.png", "frame_width": 24, "frame_height": 32},
