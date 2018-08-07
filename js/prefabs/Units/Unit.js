@@ -4,7 +4,7 @@ var RPG = RPG || {};
 
 RPG.Unit = function (game_state, name, position, properties) {
 	"use strict";
-	RPG.Prefab.call(this, game_state, name, postition, properties);
+	RPG.Prefab.call(this, game_state, name, position, properties);
 
 	this.anchor.setTo(0.5);
 
