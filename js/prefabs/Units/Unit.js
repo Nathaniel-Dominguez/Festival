@@ -18,6 +18,8 @@ RPG.Unit = function (game_state, name, position, properties) {
 RPG.Unit.prototype = Object.create(RPG.Prefab.prototype);
 RPG.Unit.prototype.constructor = RPG.Unit;
 
+// Recieve damage reduces the units health and checks to see if it is dead.
+// It also starts the attacked animation which changes the prefab tin to red then back to normal
 RPG.Unit.prototype.recieve_damage = function (damage) {
 	"use strict";
 	this.stats.health -= damage;
@@ -33,6 +35,13 @@ RPG.Unit.prototype.restore_tint = function () {
 	this.tint = 0xFFFFFFF;
 };
 
+// The attack method is the same for EnemyUnit.js and PlayerUnit.js. We declare it here 
+// so it can be called in their respective js prefab files.
+// The attack method calculates the damage based on the unit attack and the target defense
+// The damage is randomized by multiplying the attack and defense by random multipliers
+// between 0.8 and 1.2. The random generation is done using Phaser RandomDataGenerator
+// After dealing damage an attack message is displayed with action_message method declared in the prefab ActionMessage.js
+
 RPG.Unit.prototype.attack = function (target) {
 	"use strict";
 	var damage, attack_multiplier, defense_multiplier, action_message_position, action_message_text, attack_message;
@@ -46,5 +55,5 @@ RPG.Unit.prototype.attack = function (target) {
 	// show attack message
 	action_message_position = new Phaser.Point(this.game_state.game.world.width / 2, this.game_state.game.world.height * 0.1);
 	action_message_text = this.name + " attacks " + target.name + " with " + damage + " damage";
-	action_message = new RPG.ActionMessage(this.game_state, this.name + "_action_message", action_message_position, {group: "hud", texture: "rectangle_image", scale: {x: 0.75, y: 0.2}, duration: 1, message: action_message_text});
+	attack_message = new RPG.ActionMessage(this.game_state, this.name + "_action_message", action_message_position, {group: "hud", texture: "rectangle_image", scale: {x: 0.75, y: 0.2}, duration: 1, message: action_message_text});
 };

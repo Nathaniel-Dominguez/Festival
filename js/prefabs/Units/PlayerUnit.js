@@ -12,12 +12,13 @@ RPG.PlayerUnit = function (game_state, name, position, properties) {
 RPG.PlayerUnit.prototype = Object.create(RPG.Unit.prototype);
 RPG.PlayerUnit.prototype.constructor = RPG.PlayerUnit;
 
+// Implementing the act method for PlayerUnit highlights the current player unit and 
+// enables the enemy units menu, So the player can choose the enemy to attack.
 RPG.PlayerUnit.prototype.act = function () {
 	"use strict";
 	var unit_index, player_units_menu_items;
 
 	// search for the index of this unit in the player_units_menu
-
 	unit_index = this.game_state.prefabs.player_units_menu.find_item_index(this.name);
 	this.game_state.prefabs.player_units_menu.move_selection(unit_index);
 
@@ -26,6 +27,7 @@ RPG.PlayerUnit.prototype.act = function () {
 };
 
 // death function for when player dies
+// When a player unit dies it will change the alpha of the menu item making it darker.
 RPG.PlayerUnit.prototype.kill = function () {
 	"use strict";
 	var menu_item_index, menu_item;

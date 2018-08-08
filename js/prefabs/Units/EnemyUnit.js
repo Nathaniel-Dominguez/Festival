@@ -14,6 +14,7 @@ RPG.EnemyUnit = function (game_state, name, position, properties) {
 RPG.EnemyUnit.prototype = Object.create(RPG.Unit.prototype);
 RPG.EnemyUnit.prototype.constructor = RPG.EnemyUnit;
 
+// The act method for EnemyUnit chooses a random player unit as the target and attacks it.
 RPG.EnemyUnit.prototype.act = function () {
 	"use strict";
 	var target_index, target, damage;
@@ -25,13 +26,13 @@ RPG.EnemyUnit.prototype.act = function () {
 	this.attack(target);
 };
 
+// When an enemy unit dies we remove it from the enemy units menu
 RPG.EnemyUnit.prototype.kill = function () {
 	"use strict";
 	var menu_item_index, menu_item;
 	Phaser.Sprite.prototype.kill.call(this);
 
-	// remove menu
-
+	// remove from the menu
 	menu_item_index = this.game_state.prefabs.enemy_units_menu.find_item_index(this.name);
 	menu_item = this.game_state.prefabs.enemy_units_menu.remove_item(menu_item_index);
 	menu_item.kill();

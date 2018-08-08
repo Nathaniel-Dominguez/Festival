@@ -63,6 +63,10 @@ RPG.BattleState.prototype.create = function () {
 	this.units = [];
 	this.units = this.units.concat(this.groups.player_units.children);
 	this.units = this.units.concat(this.groups.enemy_units.children);
+
+	// The next_turn method takes the first unit in the array and if the unit is alive, it acts and is pushed to the end of the units array.
+	// Otherwise it calls the next turn.
+	this.next_turn();
 };
 
 RPG.BattleState.prototype.create_prefab = function (prefab_name, prefab_data) {
@@ -124,6 +128,20 @@ RPG.BattleState.prototype.show_player_actions = function (position) {
 	console.log
 };
 
+RPG.BattleState.prototype.next_turn = function () {
+	"use strict";
+
+	// Takes the next unit in the array
+	this.current_unit = this.units.shift();
+
+	// If the unit is alive, it acts, otherwise the code goes to the next turn
+	if (this.current_unit.alive) {
+		this.current_unit.act();
+		this.units.push(this.current_unit);
+	} else {
+		this.next_turn();
+	}
+};
 // For each prefab, the "create_prefab" method will instantiate the correct prefab-
 // - according to it's type. Two things are required for this.
 // 1 All prefabs must have the same constructor 
