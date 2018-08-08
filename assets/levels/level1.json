@@ -1,0 +1,17 @@
+{
+	"assets": {
+		"map_tileset": {"type": "image", "source": "assets/images/open_tileset.png"},
+		"enemy_spawner_image": {"type": "image", "source": "assets/images/enemy_spawner.png"},
+		"female_mage_spritesheet": {"type": "spritesheet", "source": "assets/images/characters/mage_f.png", "frame_width": 24, "frame_height": 32},
+
+		"level_tilemap": {"type": "tilemap", "source": "assets/maps/map1.json"}
+	},
+	"groups": [
+		"players",
+		"enemy_spawners"
+	],
+	"map": {
+		"key": "level_tilemap",
+		"tilesets": ["map_tileset", "female_mage_spritesheet"]
+	}
+}
