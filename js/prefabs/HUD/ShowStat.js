@@ -2,16 +2,18 @@
 
 var RPG = RPG || {};
 
-RPG.PlayerMenuItem = function (game_state, name, position, properties) {
+RPG.ShowStat = function (game_state, name, position, properties) {
 	"use strict";
-	RPG.MenuItem.call(this, game_state, name, position, properties);
+	RPG.TextPrefab.call(this, game_state, name, position, properties);
 
-	this.player_unit_health = new RPG.ShowStat(this.game_state, this,text + "_health", {x:280, y: this.y}, {group: "hud", text: "", style: properties.style, prefab: this.text, stat: "health"});
+	this.prefab = this.game_state.prefabs[properties.prefab];
+	this.stat = properties.stat;
 };
 
-RPG.PlayerMenuItem.prototype = Object.create(RPG.MenuItem.prototype);
-RPG.PlayerMenuItem.prototype.constructor = RPG.PlayerMenuItem;
+RPG.ShowStat.prototype = Object.create(RPG.TextPrefab.prototype);
+RPG.ShowStat.prototype.constructor = RPG.ShowStat;
 
-RPG.PlayerMenuItem.prototype.select = function () {
+RPG.ShowStat.prototype.update = function () {
 	"use strict";
+	this.text = this.prefab.stats[this.stat];
 };

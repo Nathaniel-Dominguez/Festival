@@ -26,13 +26,13 @@ RPG.Menu.prototype.process_input = function (event) {
 	case Phaser.Keyboard.UP:
 		if (this.current_item_index > 0) {
 			// navigate to previous item
-			this.move_selection(this.current_item_index -1);
+			this.move_selection(this.current_item_index - 1);
 		}
 		break;
 	case Phaser.Keyboard.DOWN:
-		if (this.current_item_index < this.menu_items.length -1) {
+		if (this.current_item_index < this.menu_items.length - 1) {
 			// navigate to next item
-			this.move_selection(this.current_item_index +1);
+			this.move_selection(this.current_item_index + 1);
 		}
 		break;
 	case Phaser.Keyboard.SPACEBAR:
@@ -41,11 +41,21 @@ RPG.Menu.prototype.process_input = function (event) {
 	}
 };
 
-RPG Menu.prototype.move_selection = function (item_index) {
+RPG.Menu.prototype.move_selection = function (item_index) {
 	"use strict";
 	this.menu_items[this.current_item_index].selection_out();
 	this.current_item_index = item_index;
 	this.menu_items[this.current_item_index].selection_over();
+};
+
+RPG.Menu.prototype.find_item_index = function (text) {
+	"use strict";
+	var item_index;
+	for (item_index = 0; item_index < this.menu_items.length; item_index += 1) {
+		if (this.menu_items[item_index].text === text) {
+			return item_index;
+		}
+	}
 };
 
 RPG.Menu.prototype.remove_item = function (index) {

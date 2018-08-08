@@ -12,7 +12,7 @@ RPG.AttackMenuItem = function (game_state, name, position, properties) {
 RPG.AttackMenuItem.prototype = Object.create(RPG.MenuItem.prototype);
 RPG.AttackMenuItem.prototype.constructor = RPG.AttackMenuItem;
 
-RPG AttackMenuItem.prototype.select = function () {
+RPG.AttackMenuItem.prototype.select = function () {
 	"use strict";
 
 	// disable actions menu
