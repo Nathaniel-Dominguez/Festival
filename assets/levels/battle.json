@@ -51,60 +51,6 @@
                 "group": "hud",
                 "scale": {"x": 0.4, "y": 1}
             }
-        },
-        "fighter": {
-            "type": "player_unit",
-            "position": {"x": 250, "y": 70},
-            "properties": {
-                "texture": "male_fighter_spritesheet",
-                "group": "player_units",
-                "frame": 10,
-                "stats": {
-                    "attack": 15,
-                    "defense": 5,
-                    "health": 100
-                }
-            }
-        },
-        "mage": {
-            "type": "player_unit",
-            "position": {"x": 250, "y": 150},
-            "properties": {
-                "texture": "female_mage_spritesheet",
-                "group": "player_units",
-                "frame": 10,
-                "stats": {
-                    "attack": 20,
-                    "defense": 2,
-                    "health": 100
-                }
-            }
-        },
-        "bat1": {
-            "type": "enemy_unit",
-            "position": {"x": 100, "y": 90},
-            "properties": {
-                "texture": "bat_spritesheet",
-                "group": "enemy_units",
-                "stats": {
-                    "attack": 10,
-                    "defense": 1,
-                    "health": 30
-                }
-            }
-        },
-        "bat2": {
-            "type": "enemy_unit",
-            "position": {"x": 100, "y": 170},
-            "properties": {
-                "texture": "bat_spritesheet",
-                "group": "enemy_units",
-                "stats": {
-                    "attack": 10,
-                    "defense": 1,
-                    "health": 30
-                }
-            }
         }
     }
 }

@@ -13,5 +13,35 @@
 	"map": {
 		"key": "level_tilemap",
 		"tilesets": ["map_tileset", "male_fighter_spritesheet"]
-	}
+	},
+	"enemy_encounters": [
+		{"probablility": 1,
+		"enemy_data": {
+			"bat1": {
+				"type": "enemy_unit",
+				"position": {"x": 100, "y": 90},
+				"properties": {
+					"texture": "bat_spritesheet",
+					"group": "enemy_units",
+					"stats": {
+						"attack": 10,
+						"defense": 1,
+						"health": 30
+					}
+				}
+			},
+			"bat2": {
+				"type": "enemy_unit",
+				"position": {"x": 100, "y": 170},
+				"properties": {
+					"texture": "bat_spritesheet",
+					"group": "enemy_units",
+					"stats": {
+						"attack": 10,
+						"defense": 1,
+						"health": 30
+					}
+				}
+			}
+		}}]
 }

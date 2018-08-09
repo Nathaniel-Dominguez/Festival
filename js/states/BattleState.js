@@ -28,9 +28,11 @@ RPG.BattleState = function () {
 RPG.BattleState.prototype = Object.create(Phaser.State.prototype);
 RPG.BattleState.prototype.constructor = RPG.BattleState;
 
-RPG.BattleState.prototype.init = function (level_data) {
+RPG.BattleState.prototype.init = function (level_dat, extra_parameters) {
 	"use strict";
 	this.level_data = level_data;
+	this.enemy_data = extra_parameters.enemy_data;
+	this.party_data = extra_parameters.party_data;
 
 	this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	this.scale.pageAlignHorizontally = true;
@@ -57,6 +59,24 @@ RPG.BattleState.prototype.create = function () {
 		}
 	}
 
+	// Creates the enemy units
+	for (enemy_unit_name in this.enemy_data) {
+		if (this.enemy_data.hasOwnProperty(enemy_unit_name)) {
+
+			// Creates the enemy units
+			this.create_prefab(enemy_unit_name, this.enemy_data[enemy_unit_name]);
+		}
+	}
+
+	// Creates the player units
+	for (player_unit_name in this.party_data) {
+		if (this.party_data.hasOwnProperty(player_unit_name)) {
+
+			// Creates the player units
+			this.create_prefab(player_unit_name, this.party_data[player_unit_name]);
+		}
+	}
+
 	// Init hud creates units array with player and enemy units
 	this.init_hud();
 
@@ -68,6 +88,47 @@ RPG.BattleState.prototype.create = function () {
 	// Otherwise it calls the next turn.
 	this.next_turn();
 };
+
+// The next turn method will check if there are remaing enemy and player units.
+// If no then we will call the end battle method and switch back to the world state. It saves party data too
+// If there are no remaing player units we will call the game over method
+RPG.BattleState.prototype.next_turn = function () {
+	"use strict";
+
+	// If all the enemy units are dead, go back to world state
+	if (this.groups.enemy_units.countLiving() === 0) {
+		this.end_battle();
+	}
+
+	// If all the player units are dead restart the game
+	if (this.groups.player_units.countLiving() === 0) {
+		this.game_over();
+	}
+
+	// Takes the next unit
+	this.current_unit = this.units.shift();
+
+	// If the unit is alive, it acts, otherwise it goes to the next turn
+	if (this.current_unit.alive) {
+		this.current_unit.act();
+		this.units.push(this.current_unit);
+	} else {
+		this.next_turn();
+	}
+};
+
+RPG.BattleState.prototype.game_over = function () {
+	"use strict";
+
+	// Saves current party health
+	this.groups.player_units.forEach(function (player_units) {
+		this.party_data[player_unit.name].properties.stats = player_unit.stats;
+	}, this);
+
+	// Go back to the world state with the current party stats
+	this.game.state.start("BootState", true, false, "assets/levels/level1.json", "WorldState", {party_data: this.party_data});
+};
+ 
 
 RPG.BattleState.prototype.create_prefab = function (prefab_name, prefab_data) {
 	"use strict";
@@ -128,20 +189,6 @@ RPG.BattleState.prototype.show_player_actions = function (position) {
 	console.log
 };
 
-RPG.BattleState.prototype.next_turn = function () {
-	"use strict";
-
-	// Takes the next unit in the array
-	this.current_unit = this.units.shift();
-
-	// If the unit is alive, it acts, otherwise the code goes to the next turn
-	if (this.current_unit.alive) {
-		this.current_unit.act();
-		this.units.push(this.current_unit);
-	} else {
-		this.next_turn();
-	}
-};
 // For each prefab, the "create_prefab" method will instantiate the correct prefab-
 // - according to it's type. Two things are required for this.
 // 1 All prefabs must have the same constructor 
