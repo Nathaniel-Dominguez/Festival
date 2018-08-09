@@ -9,7 +9,7 @@ RPG.WorldState = function () {
 
 	this.prefab_classes = {
 		"player": RPG.Player.prototype.constructor,
-		//"enemy_spawner": RPG.EnemySpawner.prototype.constructor
+		"enemy_spawner": RPG.EnemySpawner.prototype.constructor
 	};
 };
 
