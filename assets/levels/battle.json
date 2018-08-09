@@ -2,8 +2,10 @@
     "assets": {
         "rectangle_image": {"type": "image", "source": "assets/images/rectangle.png"},
         "grass_tile_image": {"type": "image", "source": "assets/images/grass_tile.png"},
+
         "male_fighter_spritesheet": {"type": "spritesheet", "source": "assets/images/characters/fighter_m.png", "frame_width": 24, "frame_height": 32},
         "female_mage_spritesheet": {"type": "spritesheet", "source": "assets/images/characters/mage_f.png", "frame_width": 24, "frame_height": 32},
+        
         "bat_spritesheet": {"type": "spritesheet", "source": "assets/images/monsters/bat.png", "frame_width": 128, "frame_height": 128}
     },
     "groups": [

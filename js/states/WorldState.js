@@ -5,6 +5,20 @@ var RPG = RPG || {};
 
 RPG.WorldState = function () {
 	"use strict";
+	Phaser.State.call(this);
+
+	this.prefab_classes = {
+		"player": RPG.Player.prototype.constructor,
+		//"enemy_spawner": RPG.EnemySpawner.prototype.constructor
+	};
+};
+
+RPG.WorldState.prototype = Object.create(Phaser.State.prototype);
+RPG.WorldState.prototype.constructor = RPG.WorldState;
+
+
+RPG.WorldState.prototype.init = function (level_data, extra_parameters) {	
+	"use strict";
 	var tileset_index;
 	this.level_data = this.level_data || level_data;
 
@@ -32,7 +46,7 @@ RPG.WorldState = function () {
 	this.party_data = extra_parameters.party_data || {
 		"fighter": {
 			"type": "player_unit",
-			"position": {"x": 250, "y": 70},
+			"position": {"x": 250, "y": 50},
 			"properties": {
 				"texture": "male_fighter_spritesheet",
 				"group": "player_units",
@@ -47,7 +61,7 @@ RPG.WorldState = function () {
 		},
 		"mage": {
 			"type": "player_unit",
-			"position": {"x": 250, "y": 150},
+			"position": {"x": 250, "y": 100},
 			"properties": {
 				"texture": "female_mage_spritesheet",
 				"group": "player_units",
