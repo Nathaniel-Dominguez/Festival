@@ -70,7 +70,7 @@ RPG.WorldState.prototype.init = function (level_data, extra_parameters) {
 					"attack": 20,
 					"defense": 2,
 					"health": 100,
-					"speed": 15
+					"speed": 10
 				}
 			}
 		}

@@ -14,34 +14,102 @@
 		"key": "level_tilemap",
 		"tilesets": ["map_tileset", "male_fighter_spritesheet"]
 	},
-	"enemy_encounters": [
-		{"probablility": 1,
-		"enemy_data": {
-			"bat1": {
-				"type": "enemy_unit",
-				"position": {"x": 100, "y": 90},
-				"properties": {
-					"texture": "bat_spritesheet",
-					"group": "enemy_units",
-					"stats": {
-						"attack": 10,
-						"defense": 1,
-						"health": 30
-					}
-				}
-			},
-			"bat2": {
-				"type": "enemy_unit",
-				"position": {"x": 100, "y": 170},
-				"properties": {
-					"texture": "bat_spritesheet",
-					"group": "enemy_units",
-					"stats": {
-						"attack": 10,
-						"defense": 1,
-						"health": 30
-					}
-				}
-			}
-		}}]
+    "enemy_encounters": [
+        {"probability": 0.3,
+         "enemy_data": {
+            "lizard1": {
+                "type": "enemy_unit",
+                "position": {"x": 100, "y": 100},
+                "properties": {
+                    "texture": "lizard_spritesheet",
+                    "group": "enemy_units",
+                    "stats": {
+                        "attack": 30,
+                        "defense": 10,
+                        "health": 50,
+                        "speed": 15
+                    }
+                }
+            }
+         }
+        },
+        {"probability": 0.5,
+         "enemy_data": {
+            "bat1": {
+                "type": "enemy_unit",
+                "position": {"x": 100, "y": 90},
+                "properties": {
+                    "texture": "bat_spritesheet",
+                    "group": "enemy_units",
+                    "stats": {
+                        "attack": 10,
+                        "defense": 1,
+                        "health": 30,
+                        "speed": 20
+                    }
+                }
+            },
+            "bat2": {
+                "type": "enemy_unit",
+                "position": {"x": 100, "y": 170},
+                "properties": {
+                    "texture": "bat_spritesheet",
+                    "group": "enemy_units",
+                    "stats": {
+                        "attack": 10,
+                        "defense": 1,
+                        "health": 30,
+                        "speed": 20
+                    }
+                }
+            }
+         }
+        },
+        {"probability": 1.0,
+         "enemy_data": {
+            "scorpion1": {
+                "type": "enemy_unit",
+                "position": {"x": 100, "y": 50},
+                "properties": {
+                    "texture": "scorpion_spritesheet",
+                    "group": "enemy_units",
+                    "stats": {
+                        "attack": 15,
+                        "defense": 1,
+                        "health": 20,
+                        "speed": 10
+                    }
+                }
+            },
+            "scorpion2": {
+                "type": "enemy_unit",
+                "position": {"x": 100, "y": 100},
+                "properties": {
+                    "texture": "scorpion_spritesheet",
+                    "group": "enemy_units",
+                    "stats": {
+                        "attack": 15,
+                        "defense": 1,
+                        "health": 20,
+                        "speed": 10
+                    }
+                }
+            },
+            "scorpion3": {
+                "type": "enemy_unit",
+                "position": {"x": 100, "y": 150},
+                "properties": {
+                    "texture": "scorpion_spritesheet",
+                    "group": "enemy_units",
+                    "stats": {
+                        "attack": 15,
+                        "defense": 1,
+                        "health": 20,
+                        "speed": 10
+                    }
+                }
+            }
+         }
+        }
+    ]
 }

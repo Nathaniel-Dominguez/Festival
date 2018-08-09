@@ -6,7 +6,9 @@
         "male_fighter_spritesheet": {"type": "spritesheet", "source": "assets/images/characters/fighter_m.png", "frame_width": 24, "frame_height": 32},
         "female_mage_spritesheet": {"type": "spritesheet", "source": "assets/images/characters/mage_f.png", "frame_width": 24, "frame_height": 32},
         
-        "bat_spritesheet": {"type": "spritesheet", "source": "assets/images/monsters/bat.png", "frame_width": 128, "frame_height": 128}
+        "bat_spritesheet": {"type": "spritesheet", "source": "assets/images/monsters/bat.png", "frame_width": 128, "frame_height": 128},
+        "scorpion_spritesheet": {"type": "spritesheet", "source": "assets/images/monsters/scorpion.png", "frame_width": 64, "frame_height": 64},
+        "lizard_spritesheet": {"type": "spritesheet", "source": "assets/images/monsters/stygian_lizard.png", "frame_width": 192, "frame_height": 192}
     },
     "groups": [
         "background",

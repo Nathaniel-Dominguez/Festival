@@ -2,11 +2,10 @@
 // The game object is the heart of the game using the constructor it handles- 
 // -common functions and the boot process
 
-var RPG = RPG || {};
-
 // Strict mode is a feature brought in with es5 that allows you to place a program 
 // or a function, in a "strict" operating context. This strict context prevents 
 // certain actions from being taken and throws more exceptions.
+var RPG = RPG || {};
 
 RPG.BootState = function () {
 	"use strict";
