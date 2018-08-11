@@ -19,7 +19,8 @@ RPG.BattleState = function () {
 		"background": RPG.TilePrefab.prototype.constructor,
 		"rectangle": RPG.Prefab.prototype.constructor,
 		"player_unit": RPG.PlayerUnit.prototype.constructor,
-		"enemy_unit": RPG.EnemyUnit.prototype.constructor
+		"enemy_unit": RPG.EnemyUnit.prototype.constructor,
+		"inventory": RPG.Inventory.prototype.constructor
 	};
 
 	this.TEXT_STYLE = {font: "14px Arial", fill: "#FFFFFF"};
@@ -31,12 +32,21 @@ RPG.BattleState.prototype.constructor = RPG.BattleState;
 RPG.BattleState.prototype.init = function (level_data, extra_parameters) {
 	"use strict";
 	this.level_data = level_data;
-	this.enemy_data = extra_parameters.enemy_data;
+	this.encounter = extra_parameters.encounter;
 	this.party_data = extra_parameters.party_data;
+
+	// Recieves the inventory data from WorldState
+	this.inventory = extra_parameters.inventory;
 
 	this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	this.scale.pageAlignHorizontally = true;
 	this.scale.pageAlignVertically = true;
+};
+
+// Preloads the XP table for the player units
+RPG.BattleState.prototype.preload = function () {
+	"use strict";
+	this.load.text("experience_table", "assets/levels/experience_table.json");
 };
 
 RPG.BattleState.prototype.create = function () {
@@ -59,12 +69,19 @@ RPG.BattleState.prototype.create = function () {
 		}
 	}
 
+	// If there is no inventory from the WorldState, create an empty one
+	if (this.inventory) {
+		this.prefabs.inventory = this.inventory;
+	} else {
+		this.prefabs.inventory = new RPG.Inventory(this, "inventory", {x: 0, y: 0}, {group: "items"});
+	}
+
 	// Creates the enemy units
-	for (enemy_unit_name in this.enemy_data) {
-		if (this.enemy_data.hasOwnProperty(enemy_unit_name)) {
+	for (enemy_unit_name in this.encounter.enemy_data) {
+		if (this.encounter.enemy_data.hasOwnProperty(enemy_unit_name)) {
 
 			// Creates the enemy units
-			this.create_prefab(enemy_unit_name, this.enemy_data[enemy_unit_name]);
+			this.create_prefab(enemy_unit_name, this.encounter.enemy_data[enemy_unit_name]);
 		}
 	}
 
@@ -76,6 +93,9 @@ RPG.BattleState.prototype.create = function () {
 			this.create_prefab(player_unit_name, this.party_data[player_unit_name]);
 		}
 	}
+
+	// Save the preloaded XP table for player units
+	this.experience_table = JSON.parse(this.game.cache.getText("experience_table"));
 
 	// Init hud creates units array with player and enemy units
 	this.init_hud();
@@ -116,6 +136,9 @@ RPG.BattleState.prototype.init_hud = function () {
 	this.show_player_actions({x: 106, y: 210});
 	this.show_units("player_units", {x: 202, y: 210}, RPG.PlayerMenuItem.prototype.constructor);
 	this.show_units("enemy_units", {x: 10, y: 210}, RPG.EnemyMenuItem.prototype.constructor);
+
+	// Create items menu
+	this.prefabs.inventory.create_menu({x: 106, y: 210});
 };
 
 RPG.BattleState.prototype.show_units = function (group_name, position, menu_item_constructor) {
@@ -141,7 +164,9 @@ RPG.BattleState.prototype.show_player_actions = function (position) {
 	var actions, actions_menu_items, action_index, actions_menu;
 
 	// Available actions
-	actions = [{text: "Attack", item_constructor: RPG.AttackMenuItem.prototype.constructor}];
+	actions = [{text: "Attack", item_constructor: RPG.AttackMenuItem.prototype.constructor},
+				{text: "Magic", item_constructor: RPG.MagicAttackMenuItem.prototype.constructor},
+				{text: "Item", item_constructor: RPG.InventoryMenuItem.prototype.constructor}];
 	actions_menu_items = [];
 	action_index = 0;
 
@@ -191,14 +216,26 @@ RPG.BattleState.prototype.game_over = function () {
 
 RPG.BattleState.prototype.end_battle = function () {
 	"use strict";
+	var recieved_experience;
 
-	// Saves current party hp
+	// Recieve the battle reward
+	recieved_experience = this.encounter.reward.experience;
 	this.groups.player_units.forEach(function (player_unit) {
+
+		// Recieve XP from enemy and divide it among the party
+		player_unit.recieve_experience(recieved_experience / this.groups.player_units.children.length);
+
+		// Saves party stats
 		this.party_data[player_unit.name].properties.stats = player_unit.stats;
 	}, this);
 
+	// Using the collect item method we collect items from defeating enemies by iterating through all items in the reward and calling collect item method
+	this.encounter.reward.items.forEach(function (item_object) {
+		this.prefabs.inventory.collect_item(item_object);
+	}, this);
+
 	// Go back to the world state with current party data
-	this.game.state.start("BootState", true, false, "assets/levels/level1.json", "WorldState", {party_data: this.party_data});
+	this.game.state.start("BootState", true, false, "assets/levels/level1.json", "WorldState", {party_data: this.party_data, inventory: this.prefabs.inventory});
 };
 
 // For each prefab, the "create_prefab" method will instantiate the correct prefab-

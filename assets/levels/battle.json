@@ -11,6 +11,8 @@
         "lizard_spritesheet": {"type": "spritesheet", "source": "assets/images/monsters/stygian_lizard.png", "frame_width": 192, "frame_height": 192}
     },
     "groups": [
+        "items",
+        "attacks",
         "background",
         "player_units",
         "enemy_units",

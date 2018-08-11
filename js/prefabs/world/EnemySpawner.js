@@ -1,4 +1,5 @@
 // This is the EnemySpawner method used to check for possible encounters.
+
 var RPG = RPG || {};
 
 RPG.EnemySpawner = function (game_state, name, position, properties) {
@@ -25,17 +26,21 @@ RPG.EnemySpawner.prototype.update = function () {
 RPG.EnemySpawner.prototype.check_for_spawn = function () {
     "use strict";
     var spawn_chance, encounter_index, enemy_encounter;
-    // check for spawn only once for overlap
+
+    // Check for spawn only once for overlap
     if (!this.overlapping) {
         spawn_chance = this.game_state.game.rnd.frac();
-        // check if the enemy spawn probability is less than the generated random number for each spawn
+
+        // Check if the enemy spawn probability is less than the generated random number for each spawn
         for (encounter_index = 0; encounter_index < this.game_state.level_data.enemy_encounters.length; encounter_index += 1) {
             enemy_encounter = this.game_state.level_data.enemy_encounters[encounter_index];
             if (spawn_chance <= enemy_encounter.probability) {
-                // save current player position for later
+
+                // Save current player position for later
                 this.game_state.player_position = this.game_state.prefabs.player.position;
-                // call battle state
-                this.game_state.game.state.start("BootState", false, false, "assets/levels/battle.json", "BattleState", {enemy_data: enemy_encounter.enemy_data, party_data: this.game_state.party_data});
+
+                // Call the battle state
+                this.game_state.game.state.start("BootState", false, false, "assets/levels/battle.json", "BattleState", {encounter: enemy_encounter, party_data: this.game_state.party_data, inventory: this.game_state.inventory});
                 break;
             }
         }

@@ -87,3 +87,18 @@ RPG.Menu.prototype.disable = function () {
 	}
 	this.current_item_index = 0;
 };
+
+// To alternate through menus we add the hide and show menus methods
+RPG.Menu.prototype.show = function () {
+	"use strict";
+	this.menu_items.forEach(function (menu_item) {
+		menu_item.visible = true;
+	}, this);
+};
+
+RPG.Menu.prototype.hide = function () {
+	"use strict";
+	this.menu_items.forEach(function (menu_item) {
+		menu_item.visible = false;
+	}, this);
+};

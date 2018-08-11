@@ -18,7 +18,7 @@ RPG.EnemyMenuItem.prototype.select = function () {
 	enemy = this.game_state.prefabs[this.text];
 
 	// Attack selected enemy
-	this.game_state.current_unit.attack(enemy);
+	this.game_state.current_attack.hit(enemy);
 
 	// Disable menus
 	this.game_state.prefabs.enemy_units_menu.disable();

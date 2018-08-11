@@ -7,6 +7,7 @@
 		"level_tilemap": {"type": "tilemap", "source": "assets/maps/map1.json"}
 	},
 	"groups": [
+        "items",
 		"players",
 		"enemy_spawners"
 	],
@@ -31,6 +32,10 @@
                     }
                 }
             }
+         },
+         "reward": {
+            "experience": 100,
+            "items": [{"type": "potion", "properties": {"group": "items", "health_power": 50}}]
          }
         },
         {"probability": 0.5,
@@ -63,6 +68,10 @@
                     }
                 }
             }
+         },
+         "reward": {
+            "experience": 100,
+            "items": [{"type": "potion", "properties": {"group": "items", "health_power": 50}}]
          }
         },
         {"probability": 1.0,
@@ -109,6 +118,10 @@
                     }
                 }
             }
+         }, 
+         "reward": {
+            "experience": 100,
+            "items": [{"type": "potion", "properties": {"group": "items", "health_power": 50}}]
          }
         }
     ]

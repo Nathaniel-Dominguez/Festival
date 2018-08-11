@@ -53,9 +53,13 @@ RPG.WorldState.prototype.init = function (level_data, extra_parameters) {
 				"frame": 10,
 				"stats": {
 					"attack": 15,
+					"magic_attack": 5,
 					"defense": 5,
 					"health": 100,
-					"speed": 15
+					"mana": 100,
+					"speed": 15,
+					"experience": 0,
+					"current_level": 0
 				}
 			}
 		},
@@ -68,13 +72,19 @@ RPG.WorldState.prototype.init = function (level_data, extra_parameters) {
 				"frame": 10,
 				"stats": {
 					"attack": 20,
+					"magic_attack": 20,
 					"defense": 2,
 					"health": 100,
-					"speed": 10
+					"mana": 100,
+					"speed": 10,
+					"experience": 0,
+					"current_level": 0
 				}
 			}
 		}
 	};
+
+	this.inventory = extra_parameters.inventory;
 
 	if (extra_parameters.restart_position) {
 		this.player_position = undefined;

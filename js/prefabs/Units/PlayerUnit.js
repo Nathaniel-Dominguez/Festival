@@ -36,4 +36,29 @@ RPG.PlayerUnit.prototype.kill = function () {
 	//remove from the menu on death
 	menu_item_index = this.game_state.prefabs.player_units_menu.find_item_index(this.name);
 	this.game_state.prefabs.player_units_menu.menu_items[menu_item_index].alpha = 0.5;
-}
+};
+
+// The recieve experience method will increase the player units experience
+// It will then check to see if the player reached the next level using the experience table
+// Finally when that is done and a new level is reached the stats are increased and the unit XP is reset to 0
+RPG.PlayerUnit.prototype.recieve_experience = function (experience) {
+	"use strict";
+	var next_level_data, stat;
+
+	// Increase player unit XP
+	this.stats.experience += experience;
+	next_level_data = this.game_state.experience_table[this.stats.current_level];
+
+	// If current XP is greater then the required amount for the next level, the unit levels up
+	if (this.stats.experience >= next_level_data.required_exp) {
+		this.stats.current_level += 1;
+		this.stats.experience = 0;
+
+		// Increase unit stats for the level gain
+		for (stat in next_level_data.stats_increase) {
+			if (next_level_data.stats_increase.hasOwnProperty(stat)) {
+				this.stats[stat] += next_level_data.stats_increase[stat];
+			}
+		}
+	}
+};
