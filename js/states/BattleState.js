@@ -207,9 +207,17 @@ RPG.BattleState.prototype.next_turn = function () {
 	}
 }; 
 
+RPG.BattleState.prototype.game_win = function () {
+	"use strict";
+
+	alert("YOU HAVE SLAIN THE LIZARD GODZILLA! YOU WIN!");
+	this.game.state.start("BootState", true, false, "assets/levels/level1.json", "WorldState", {resetart_position: true});
+};
+
 RPG.BattleState.prototype.game_over = function () {
 	"use strict";
 
+	alert("Your party is dead! You have failed!");
 	// Go back to world state and resetart the player position
 	this.game.state.start("BootState", true, false, "assets/levels/level1.json", "WorldState", {restart_position: true});
 };
@@ -217,6 +225,8 @@ RPG.BattleState.prototype.game_over = function () {
 RPG.BattleState.prototype.end_battle = function () {
 	"use strict";
 	var recieved_experience;
+
+	alert("hooray you have defeated the monsters! But more are still out there that must be slain before the onslaught ends");
 
 	// Recieve the battle reward
 	recieved_experience = this.encounter.reward.experience;
